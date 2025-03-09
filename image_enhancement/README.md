@@ -1,7 +1,6 @@
-# Image Enhancement Tool 🖼️
+# Gamma Correction and Histograms 🖼️
 
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## 📋 Overview
@@ -13,20 +12,26 @@ A robust image enhancement toolkit that implements various point processing tech
 ### Gamma Correction
 | Original Image | Gamma = 0.5 | Gamma = 2.0 |
 |:-------------:|:-----------:|:-----------:|
-| ![Original](images/examples/dark_scene.jpg) | ![Brightened](images/examples/gamma_0.5.jpg) | ![Darkened](images/examples/gamma_2.0.jpg) |
-| Dark Scene | Brightened (γ=0.5) | Darkened (γ=2.0) |
+| ![Original](images/underexposed.jpg) | ![Brightened](results/underexposed_gamma_0.5.png) | ![Darkened](results/underexposed_gamma_2.0.png) |
+| Underexposed Scene | Brightened (γ=0.5) | Darkened (γ=2.0) |
 
 ### Histogram Equalization
 | Original Image | Equalized Result | Histogram Comparison |
 |:-------------:|:----------------:|:-------------------:|
-| ![Original](images/examples/low_contrast.jpg) | ![Equalized](images/examples/equalized.jpg) | ![Histogram](images/examples/histogram_comparison.png) |
-| Low Contrast | Enhanced Contrast | Before/After Histograms |
+| ![Original](images/balanced.jpg) | ![Equalized](results/balanced_equalized.png) | ![Histogram](results/balanced_equalization.png) |
+| Original Image | Enhanced Contrast | Histogram Analysis |
 
 ### Color Processing (HSV)
 | Original Image | Enhanced Result |
 |:-------------:|:--------------:|
-| ![Original](images/examples/color_original.jpg) | ![Enhanced](images/examples/color_enhanced.jpg) |
+| ![Original](images/color_underexposed.jpg) | ![Enhanced](results/color_underexposed_color_processing.png) |
 | Original Color Image | Enhanced using HSV Processing |
+
+### Combined Operations
+| Original Image | Gamma then Equalization | Equalization then Gamma |
+|:-------------:|:----------------------:|:----------------------:|
+| ![Original](images/balanced.jpg) | ![Gamma-Eq](results/balanced_gamma_then_eq.png) | ![Eq-Gamma](results/balanced_eq_then_gamma.png) |
+| Original Image | Gamma → Equalization | Equalization → Gamma |
 
 ## ✨ Key Features
 
@@ -134,16 +139,6 @@ Enhanced Image
 - Dynamic Range: [0.0123, 0.9876]
 ```
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -153,12 +148,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Mustafa - [@MustafaaCENG](https://github.com/MustafaaCENG)
 
 Project Link: [https://github.com/MustafaaCENG/image-enhancement](https://github.com/MustafaaCENG/image-enhancement)
-
-## 🙏 Acknowledgments
-
-- OpenCV team for their excellent computer vision library
-- NumPy and SciPy communities
-- Contributors and testers
-
----
-Made with ❤️ by [Your Name/Organization] 
