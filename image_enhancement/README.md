@@ -148,3 +148,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Mustafa - [@MustafaaCENG](https://github.com/MustafaaCENG)
 
 Project Link: [https://github.com/MustafaaCENG/image-enhancement](https://github.com/MustafaaCENG/image-enhancement)
+
+AI tool used: [Claude Sonnet 3.7](https://claude.ai/)
