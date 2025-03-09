@@ -1,12 +1,40 @@
 import os
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 from skimage import io, color
-from skimage.util import random_noise
+import logging
+from datetime import datetime
 
 import spatial_filters as sf
 import utils
+
+def setup_logging():
+    """Setup logging configuration."""
+    if not os.path.exists('results'):
+        os.makedirs('results')
+    
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_file = os.path.join('results', f'processing_log_{timestamp}.txt')
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler()
+        ]
+    )
+    return timestamp
+
+def save_result_image(image, name, timestamp):
+    """Save processed image to results directory."""
+    if not os.path.exists('results'):
+        os.makedirs('results')
+    
+    filename = os.path.join('results', f'{name}_{timestamp}.jpg')
+    cv2.imwrite(filename, image)
+    logging.info(f'Saved {name} to {filename}')
+    return filename
 
 def create_test_images_dir():
     """Create a directory for test images if it doesn't exist."""
@@ -32,9 +60,9 @@ def load_images(image_paths):
             print(f"Warning: Image not found at {path}")
     return images
 
-def gaussian_filtering_demo(image):
+def gaussian_filtering_demo(image, timestamp):
     """Demonstrate Gaussian filtering with different parameters."""
-    print("\n=== Gaussian Filtering Demo ===")
+    logging.info("\n=== Gaussian Filtering Demo ===")
     
     # Add Gaussian noise to the image
     noisy_image = sf.add_gaussian_noise(image, mean=0, sigma=25)
@@ -43,6 +71,12 @@ def gaussian_filtering_demo(image):
     filtered_small = sf.apply_gaussian_filter(noisy_image, kernel_size=3, sigma=1.0)
     filtered_medium = sf.apply_gaussian_filter(noisy_image, kernel_size=5, sigma=1.5)
     filtered_large = sf.apply_gaussian_filter(noisy_image, kernel_size=9, sigma=2.0)
+    
+    # Save results
+    save_result_image(noisy_image, 'gaussian_noisy', timestamp)
+    save_result_image(filtered_small, 'gaussian_filtered_3x3', timestamp)
+    save_result_image(filtered_medium, 'gaussian_filtered_5x5', timestamp)
+    save_result_image(filtered_large, 'gaussian_filtered_9x9', timestamp)
     
     # Display results
     images = [image, noisy_image, filtered_small, filtered_medium, filtered_large]
@@ -60,20 +94,29 @@ def gaussian_filtering_demo(image):
     filter_names = ['Gaussian 3x3', 'Gaussian 5x5', 'Gaussian 9x9']
     results = utils.evaluate_filters(image, filtered_images, filter_names)
     
+    # Log evaluation results
+    for name, metrics in results.items():
+        logging.info(f'{name} - PSNR: {metrics["PSNR"]:.2f} dB, SSIM: {metrics["SSIM"]:.3f}')
+    
     # Print and plot evaluation results
     utils.print_evaluation_results(results)
-    utils.plot_evaluation_results(results)
+    utils.plot_evaluation_results(results, timestamp)
     
     return noisy_image, filtered_medium
 
-def sharpening_demo(image):
+def sharpening_demo(image, timestamp):
     """Demonstrate image sharpening using unsharp masking."""
-    print("\n=== Image Sharpening Demo ===")
+    logging.info("\n=== Image Sharpening Demo ===")
     
     # Apply unsharp masking with different parameters
     sharpened_mild = sf.unsharp_masking(image, kernel_size=5, sigma=1.0, amount=0.5)
     sharpened_medium = sf.unsharp_masking(image, kernel_size=5, sigma=1.0, amount=1.0)
     sharpened_strong = sf.unsharp_masking(image, kernel_size=5, sigma=1.0, amount=2.0)
+    
+    # Save results
+    save_result_image(sharpened_mild, 'sharpened_mild', timestamp)
+    save_result_image(sharpened_medium, 'sharpened_medium', timestamp)
+    save_result_image(sharpened_strong, 'sharpened_strong', timestamp)
     
     # Display results
     images = [image, sharpened_mild, sharpened_medium, sharpened_strong]
@@ -87,9 +130,9 @@ def sharpening_demo(image):
     
     return sharpened_medium
 
-def edge_detection_demo(image, sharpened_image):
+def edge_detection_demo(image, sharpened_image, timestamp):
     """Demonstrate edge detection algorithms."""
-    print("\n=== Edge Detection Demo ===")
+    logging.info("\n=== Edge Detection Demo ===")
     
     # Apply edge detection to original image
     sobel_edges, sobel_magnitude, _ = sf.sobel_edge_detection(image)
@@ -100,6 +143,14 @@ def edge_detection_demo(image, sharpened_image):
     sobel_edges_sharp, sobel_magnitude_sharp, _ = sf.sobel_edge_detection(sharpened_image)
     prewitt_edges_sharp, _ = sf.prewitt_edge_detection(sharpened_image)
     laplacian_edges_sharp = sf.laplacian_edge_detection(sharpened_image)
+    
+    # Save results
+    save_result_image(sobel_edges, 'sobel_edges', timestamp)
+    save_result_image(prewitt_edges, 'prewitt_edges', timestamp)
+    save_result_image(laplacian_edges, 'laplacian_edges', timestamp)
+    save_result_image(sobel_edges_sharp, 'sobel_edges_sharp', timestamp)
+    save_result_image(prewitt_edges_sharp, 'prewitt_edges_sharp', timestamp)
+    save_result_image(laplacian_edges_sharp, 'laplacian_edges_sharp', timestamp)
     
     # Display results for original image
     images1 = [image, sobel_edges, prewitt_edges, laplacian_edges]
@@ -128,9 +179,9 @@ def edge_detection_demo(image, sharpened_image):
     
     return sobel_edges
 
-def median_filtering_demo(image):
+def median_filtering_demo(image, timestamp):
     """Demonstrate median filtering for salt and pepper noise removal."""
-    print("\n=== Median Filtering Demo ===")
+    logging.info("\n=== Median Filtering Demo ===")
     
     # Add salt and pepper noise
     noisy_image = sf.add_salt_pepper_noise(image, salt_prob=0.05, pepper_prob=0.05)
@@ -141,6 +192,12 @@ def median_filtering_demo(image):
     
     # Apply Gaussian filter for comparison
     gaussian_filtered = sf.apply_gaussian_filter(noisy_image, kernel_size=5, sigma=1.5)
+    
+    # Save results
+    save_result_image(noisy_image, 'salt_pepper_noisy', timestamp)
+    save_result_image(median_3x3, 'median_filtered_3x3', timestamp)
+    save_result_image(median_5x5, 'median_filtered_5x5', timestamp)
+    save_result_image(gaussian_filtered, 'gaussian_comparison', timestamp)
     
     # Display results
     images = [image, noisy_image, median_3x3, median_5x5, gaussian_filtered]
@@ -158,7 +215,8 @@ def median_filtering_demo(image):
         [image, noisy_image, median_3x3, median_5x5, gaussian_filtered],
         ['Original Histogram', 'Noisy Histogram', 'Median 3x3 Histogram', 
          'Median 5x5 Histogram', 'Gaussian Histogram'],
-        rows=2, cols=3
+        rows=2, cols=3,
+        timestamp=timestamp
     )
     
     # Evaluate filters
@@ -168,13 +226,13 @@ def median_filtering_demo(image):
     
     # Print and plot evaluation results
     utils.print_evaluation_results(results)
-    utils.plot_evaluation_results(results)
+    utils.plot_evaluation_results(results, timestamp)
     
     return noisy_image, median_5x5
 
-def integrated_pipeline_demo(image):
+def integrated_pipeline_demo(image, timestamp):
     """Demonstrate an integrated image processing pipeline."""
-    print("\n=== Integrated Pipeline Demo ===")
+    logging.info("\n=== Integrated Pipeline Demo ===")
     
     # Step 1: Add salt and pepper noise
     noisy_image = sf.add_salt_pepper_noise(image, salt_prob=0.05, pepper_prob=0.05)
@@ -190,6 +248,13 @@ def integrated_pipeline_demo(image):
     
     # Step 5: Apply edge detection
     edges, _, _ = sf.sobel_edge_detection(sharpened)
+    
+    # Save results
+    save_result_image(noisy_image, 'pipeline_step1_noisy', timestamp)
+    save_result_image(median_filtered, 'pipeline_step2_median', timestamp)
+    save_result_image(gaussian_filtered, 'pipeline_step3_gaussian', timestamp)
+    save_result_image(sharpened, 'pipeline_step4_sharpened', timestamp)
+    save_result_image(edges, 'pipeline_step5_edges', timestamp)
     
     # Display the pipeline steps
     images = [image, noisy_image, median_filtered, gaussian_filtered, sharpened, edges]
@@ -210,14 +275,14 @@ def integrated_pipeline_demo(image):
     
     # Print and plot evaluation results
     utils.print_evaluation_results(results)
-    utils.plot_evaluation_results(results)
+    utils.plot_evaluation_results(results, timestamp)
 
-def comparative_analysis(images, image_names):
+def comparative_analysis(images, image_names, timestamp):
     """Perform comparative analysis of filtering techniques on multiple images."""
-    print("\n=== Comparative Analysis ===")
+    logging.info("\n=== Comparative Analysis ===")
     
     for i, (image, name) in enumerate(zip(images, image_names)):
-        print(f"\nAnalyzing image: {name}")
+        logging.info(f"\nAnalyzing image: {name}")
         
         # Add noise
         noisy_gaussian = sf.add_gaussian_noise(image, mean=0, sigma=20)
@@ -228,6 +293,14 @@ def comparative_analysis(images, image_names):
         median_filtered = sf.median_filter(noisy_sp, kernel_size=5)
         sharpened = sf.unsharp_masking(image, kernel_size=5, sigma=1.0, amount=1.5)
         edges, _, _ = sf.sobel_edge_detection(image)
+        
+        # Save results with image name in filename
+        save_result_image(noisy_gaussian, f'{name}_gaussian_noise', timestamp)
+        save_result_image(noisy_sp, f'{name}_salt_pepper', timestamp)
+        save_result_image(gaussian_filtered, f'{name}_gaussian_filtered', timestamp)
+        save_result_image(median_filtered, f'{name}_median_filtered', timestamp)
+        save_result_image(sharpened, f'{name}_sharpened', timestamp)
+        save_result_image(edges, f'{name}_edges', timestamp)
         
         # Display results
         images_to_display = [
@@ -252,12 +325,17 @@ def comparative_analysis(images, image_names):
         
         # Print and plot evaluation results
         utils.print_evaluation_results(results)
-        utils.plot_evaluation_results(results)
+        utils.plot_evaluation_results(results, timestamp)
 
 def main():
     """Main function to run all demonstrations."""
+    # Setup logging
+    timestamp = setup_logging()
+    logging.info("Starting image processing demonstrations")
+    
     # Check if test_images directory exists
     if not create_test_images_dir():
+        logging.error("Test images directory could not be created")
         return
     
     # Look for images in the test_images directory
@@ -265,8 +343,7 @@ def main():
                   if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tif', '.tiff'))]
     
     if not image_paths:
-        print("No images found in the 'test_images' directory.")
-        print("Please add some images and run the script again.")
+        logging.error("No images found in the 'test_images' directory")
         return
     
     # Load images
@@ -274,25 +351,29 @@ def main():
     image_names = [os.path.basename(path) for path in image_paths]
     
     if not images:
-        print("Failed to load any images. Please check the image files.")
+        logging.error("Failed to load any images")
         return
     
-    print(f"Loaded {len(images)} images: {', '.join(image_names)}")
+    logging.info(f"Loaded {len(images)} images: {', '.join(image_names)}")
     
     # Use the first image for individual demonstrations
     main_image = images[0]
     
-    # Run demonstrations
-    noisy_gaussian, gaussian_filtered = gaussian_filtering_demo(main_image)
-    sharpened_image = sharpening_demo(main_image)
-    edge_map = edge_detection_demo(main_image, sharpened_image)
-    noisy_sp, median_filtered = median_filtering_demo(main_image)
-    integrated_pipeline_demo(main_image)
-    
-    # Comparative analysis on all images
-    comparative_analysis(images, image_names)
-    
-    print("\nAll demonstrations completed successfully!")
+    try:
+        # Run demonstrations
+        noisy_gaussian, gaussian_filtered = gaussian_filtering_demo(main_image, timestamp)
+        sharpened_image = sharpening_demo(main_image, timestamp)
+        edge_map = edge_detection_demo(main_image, sharpened_image, timestamp)
+        noisy_sp, median_filtered = median_filtering_demo(main_image, timestamp)
+        integrated_pipeline_demo(main_image, timestamp)
+        
+        # Comparative analysis on all images
+        comparative_analysis(images, image_names, timestamp)
+        
+        logging.info("All demonstrations completed successfully!")
+    except Exception as e:
+        logging.error(f"An error occurred during processing: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     main() 

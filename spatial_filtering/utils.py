@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 import cv2
+import os
 
 def display_images(images, titles, rows, cols, figsize=(15, 10)):
     """
@@ -29,7 +30,7 @@ def display_images(images, titles, rows, cols, figsize=(15, 10)):
     plt.tight_layout()
     plt.show()
 
-def plot_histograms(images, titles, rows, cols, figsize=(15, 10)):
+def plot_histograms(images, titles, rows, cols, figsize=(15, 10), timestamp=None):
     """
     Plot histograms for multiple images.
     
@@ -39,6 +40,7 @@ def plot_histograms(images, titles, rows, cols, figsize=(15, 10)):
         rows (int): Number of rows in the grid
         cols (int): Number of columns in the grid
         figsize (tuple): Figure size (width, height)
+        timestamp (str): Timestamp for saving the plot
     """
     fig, axes = plt.subplots(rows, cols, figsize=figsize)
     axes = axes.flatten()
@@ -57,6 +59,12 @@ def plot_histograms(images, titles, rows, cols, figsize=(15, 10)):
             axes[i].grid(alpha=0.3)
     
     plt.tight_layout()
+    
+    if timestamp:
+        if not os.path.exists('results'):
+            os.makedirs('results')
+        plt.savefig(os.path.join('results', f'histograms_{timestamp}.png'))
+    
     plt.show()
 
 def calculate_psnr(original, filtered):
@@ -112,49 +120,50 @@ def evaluate_filters(original, filtered_images, filter_names):
 
 def print_evaluation_results(results):
     """
-    Print evaluation results in a formatted table.
+    Print evaluation results in a formatted way.
     
     Args:
-        results (dict): Dictionary containing evaluation results
+        results (dict): Dictionary containing PSNR and SSIM values for each filter
     """
-    print("\nQuantitative Evaluation Results:")
-    print("-" * 60)
-    print(f"{'Filter':<20} | {'PSNR (dB)':<15} | {'SSIM':<15}")
-    print("-" * 60)
+    print("\nFilter Evaluation Results:")
+    print("-" * 50)
+    print(f"{'Filter Name':<15} {'PSNR (dB)':<12} {'SSIM':<10}")
+    print("-" * 50)
     
-    for filter_name, metrics in results.items():
-        print(f"{filter_name:<20} | {metrics['PSNR']:<15.2f} | {metrics['SSIM']:<15.4f}")
-    
-    print("-" * 60)
+    for name, metrics in results.items():
+        print(f"{name:<15} {metrics['PSNR']:>10.2f}  {metrics['SSIM']:>8.3f}")
 
-def plot_evaluation_results(results):
+def plot_evaluation_results(results, timestamp=None):
     """
     Plot evaluation results as bar charts.
     
     Args:
-        results (dict): Dictionary containing evaluation results
+        results (dict): Dictionary containing PSNR and SSIM values for each filter
+        timestamp (str): Timestamp for saving the plot
     """
-    filter_names = list(results.keys())
-    psnr_values = [results[name]['PSNR'] for name in filter_names]
-    ssim_values = [results[name]['SSIM'] for name in filter_names]
+    names = list(results.keys())
+    psnr_values = [metrics['PSNR'] for metrics in results.values()]
+    ssim_values = [metrics['SSIM'] for metrics in results.values()]
     
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
     
     # PSNR plot
-    ax1.bar(filter_names, psnr_values, color='skyblue')
+    ax1.bar(names, psnr_values)
     ax1.set_title('PSNR Comparison')
     ax1.set_ylabel('PSNR (dB)')
-    ax1.set_ylim(bottom=0)
-    ax1.grid(axis='y', alpha=0.3)
-    plt.setp(ax1.get_xticklabels(), rotation=45, ha='right')
+    ax1.tick_params(axis='x', rotation=45)
     
     # SSIM plot
-    ax2.bar(filter_names, ssim_values, color='lightgreen')
+    ax2.bar(names, ssim_values)
     ax2.set_title('SSIM Comparison')
     ax2.set_ylabel('SSIM')
-    ax2.set_ylim(0, 1)
-    ax2.grid(axis='y', alpha=0.3)
-    plt.setp(ax2.get_xticklabels(), rotation=45, ha='right')
+    ax2.tick_params(axis='x', rotation=45)
     
     plt.tight_layout()
+    
+    if timestamp:
+        if not os.path.exists('results'):
+            os.makedirs('results')
+        plt.savefig(os.path.join('results', f'metrics_comparison_{timestamp}.png'))
+    
     plt.show() 

@@ -1,0 +1,88 @@
+2025-03-09 14:09:44,171 - INFO - Starting image processing demonstrations
+2025-03-09 14:09:44,235 - INFO - Loaded 6 images: balanced.jpg, color_balanced.jpg, color_overexposed.jpg, color_underexposed.jpg, overexposed.jpg, underexposed.jpg
+2025-03-09 14:09:44,235 - INFO - 
+=== Gaussian Filtering Demo ===
+2025-03-09 14:09:44,289 - INFO - Saved gaussian_noisy to results\gaussian_noisy_20250309_140944.jpg
+2025-03-09 14:09:44,292 - INFO - Saved gaussian_filtered_3x3 to results\gaussian_filtered_3x3_20250309_140944.jpg
+2025-03-09 14:09:44,294 - INFO - Saved gaussian_filtered_5x5 to results\gaussian_filtered_5x5_20250309_140944.jpg
+2025-03-09 14:09:44,306 - INFO - Saved gaussian_filtered_9x9 to results\gaussian_filtered_9x9_20250309_140944.jpg
+2025-03-09 14:09:46,318 - INFO - Gaussian 3x3 - PSNR: 28.13 dB, SSIM: 0.630
+2025-03-09 14:09:46,318 - INFO - Gaussian 5x5 - PSNR: 28.85 dB, SSIM: 0.733
+2025-03-09 14:09:46,318 - INFO - Gaussian 9x9 - PSNR: 27.64 dB, SSIM: 0.754
+2025-03-09 14:09:46,778 - INFO - 
+=== Image Sharpening Demo ===
+2025-03-09 14:09:46,829 - INFO - Saved sharpened_mild to results\sharpened_mild_20250309_140944.jpg
+2025-03-09 14:09:46,834 - INFO - Saved sharpened_medium to results\sharpened_medium_20250309_140944.jpg
+2025-03-09 14:09:46,838 - INFO - Saved sharpened_strong to results\sharpened_strong_20250309_140944.jpg
+2025-03-09 14:09:47,812 - INFO - 
+=== Edge Detection Demo ===
+2025-03-09 14:09:47,907 - INFO - Saved sobel_edges to results\sobel_edges_20250309_140944.jpg
+2025-03-09 14:09:47,910 - INFO - Saved prewitt_edges to results\prewitt_edges_20250309_140944.jpg
+2025-03-09 14:09:47,912 - INFO - Saved laplacian_edges to results\laplacian_edges_20250309_140944.jpg
+2025-03-09 14:09:47,916 - INFO - Saved sobel_edges_sharp to results\sobel_edges_sharp_20250309_140944.jpg
+2025-03-09 14:09:47,919 - INFO - Saved prewitt_edges_sharp to results\prewitt_edges_sharp_20250309_140944.jpg
+2025-03-09 14:09:47,923 - INFO - Saved laplacian_edges_sharp to results\laplacian_edges_sharp_20250309_140944.jpg
+2025-03-09 14:09:50,421 - INFO - 
+=== Median Filtering Demo ===
+2025-03-09 14:09:50,618 - INFO - Saved salt_pepper_noisy to results\salt_pepper_noisy_20250309_140944.jpg
+2025-03-09 14:09:50,629 - INFO - Saved median_filtered_3x3 to results\median_filtered_3x3_20250309_140944.jpg
+2025-03-09 14:09:50,632 - INFO - Saved median_filtered_5x5 to results\median_filtered_5x5_20250309_140944.jpg
+2025-03-09 14:09:50,635 - INFO - Saved gaussian_comparison to results\gaussian_comparison_20250309_140944.jpg
+2025-03-09 14:09:55,057 - INFO - 
+=== Integrated Pipeline Demo ===
+2025-03-09 14:09:55,259 - INFO - Saved pipeline_step1_noisy to results\pipeline_step1_noisy_20250309_140944.jpg
+2025-03-09 14:09:55,261 - INFO - Saved pipeline_step2_median to results\pipeline_step2_median_20250309_140944.jpg
+2025-03-09 14:09:55,264 - INFO - Saved pipeline_step3_gaussian to results\pipeline_step3_gaussian_20250309_140944.jpg
+2025-03-09 14:09:55,268 - INFO - Saved pipeline_step4_sharpened to results\pipeline_step4_sharpened_20250309_140944.jpg
+2025-03-09 14:09:55,272 - INFO - Saved pipeline_step5_edges to results\pipeline_step5_edges_20250309_140944.jpg
+2025-03-09 14:09:57,212 - INFO - 
+=== Comparative Analysis ===
+2025-03-09 14:09:57,212 - INFO - 
+Analyzing image: balanced.jpg
+2025-03-09 14:09:57,449 - INFO - Saved balanced.jpg_gaussian_noise to results\balanced.jpg_gaussian_noise_20250309_140944.jpg
+2025-03-09 14:09:57,454 - INFO - Saved balanced.jpg_salt_pepper to results\balanced.jpg_salt_pepper_20250309_140944.jpg
+2025-03-09 14:09:57,457 - INFO - Saved balanced.jpg_gaussian_filtered to results\balanced.jpg_gaussian_filtered_20250309_140944.jpg
+2025-03-09 14:09:57,461 - INFO - Saved balanced.jpg_median_filtered to results\balanced.jpg_median_filtered_20250309_140944.jpg
+2025-03-09 14:09:57,466 - INFO - Saved balanced.jpg_sharpened to results\balanced.jpg_sharpened_20250309_140944.jpg
+2025-03-09 14:09:57,473 - INFO - Saved balanced.jpg_edges to results\balanced.jpg_edges_20250309_140944.jpg
+2025-03-09 14:09:59,274 - INFO - 
+Analyzing image: color_balanced.jpg
+2025-03-09 14:09:59,477 - INFO - Saved color_balanced.jpg_gaussian_noise to results\color_balanced.jpg_gaussian_noise_20250309_140944.jpg
+2025-03-09 14:09:59,481 - INFO - Saved color_balanced.jpg_salt_pepper to results\color_balanced.jpg_salt_pepper_20250309_140944.jpg
+2025-03-09 14:09:59,484 - INFO - Saved color_balanced.jpg_gaussian_filtered to results\color_balanced.jpg_gaussian_filtered_20250309_140944.jpg
+2025-03-09 14:09:59,487 - INFO - Saved color_balanced.jpg_median_filtered to results\color_balanced.jpg_median_filtered_20250309_140944.jpg
+2025-03-09 14:09:59,492 - INFO - Saved color_balanced.jpg_sharpened to results\color_balanced.jpg_sharpened_20250309_140944.jpg
+2025-03-09 14:09:59,497 - INFO - Saved color_balanced.jpg_edges to results\color_balanced.jpg_edges_20250309_140944.jpg
+2025-03-09 14:10:01,352 - INFO - 
+Analyzing image: color_overexposed.jpg
+2025-03-09 14:10:01,533 - INFO - Saved color_overexposed.jpg_gaussian_noise to results\color_overexposed.jpg_gaussian_noise_20250309_140944.jpg
+2025-03-09 14:10:01,536 - INFO - Saved color_overexposed.jpg_salt_pepper to results\color_overexposed.jpg_salt_pepper_20250309_140944.jpg
+2025-03-09 14:10:01,539 - INFO - Saved color_overexposed.jpg_gaussian_filtered to results\color_overexposed.jpg_gaussian_filtered_20250309_140944.jpg
+2025-03-09 14:10:01,549 - INFO - Saved color_overexposed.jpg_median_filtered to results\color_overexposed.jpg_median_filtered_20250309_140944.jpg
+2025-03-09 14:10:01,552 - INFO - Saved color_overexposed.jpg_sharpened to results\color_overexposed.jpg_sharpened_20250309_140944.jpg
+2025-03-09 14:10:01,555 - INFO - Saved color_overexposed.jpg_edges to results\color_overexposed.jpg_edges_20250309_140944.jpg
+2025-03-09 14:10:03,257 - INFO - 
+Analyzing image: color_underexposed.jpg
+2025-03-09 14:10:03,431 - INFO - Saved color_underexposed.jpg_gaussian_noise to results\color_underexposed.jpg_gaussian_noise_20250309_140944.jpg
+2025-03-09 14:10:03,434 - INFO - Saved color_underexposed.jpg_salt_pepper to results\color_underexposed.jpg_salt_pepper_20250309_140944.jpg
+2025-03-09 14:10:03,436 - INFO - Saved color_underexposed.jpg_gaussian_filtered to results\color_underexposed.jpg_gaussian_filtered_20250309_140944.jpg
+2025-03-09 14:10:03,438 - INFO - Saved color_underexposed.jpg_median_filtered to results\color_underexposed.jpg_median_filtered_20250309_140944.jpg
+2025-03-09 14:10:03,443 - INFO - Saved color_underexposed.jpg_sharpened to results\color_underexposed.jpg_sharpened_20250309_140944.jpg
+2025-03-09 14:10:03,445 - INFO - Saved color_underexposed.jpg_edges to results\color_underexposed.jpg_edges_20250309_140944.jpg
+2025-03-09 14:10:05,070 - INFO - 
+Analyzing image: overexposed.jpg
+2025-03-09 14:10:05,264 - INFO - Saved overexposed.jpg_gaussian_noise to results\overexposed.jpg_gaussian_noise_20250309_140944.jpg
+2025-03-09 14:10:05,278 - INFO - Saved overexposed.jpg_salt_pepper to results\overexposed.jpg_salt_pepper_20250309_140944.jpg
+2025-03-09 14:10:05,281 - INFO - Saved overexposed.jpg_gaussian_filtered to results\overexposed.jpg_gaussian_filtered_20250309_140944.jpg
+2025-03-09 14:10:05,283 - INFO - Saved overexposed.jpg_median_filtered to results\overexposed.jpg_median_filtered_20250309_140944.jpg
+2025-03-09 14:10:05,288 - INFO - Saved overexposed.jpg_sharpened to results\overexposed.jpg_sharpened_20250309_140944.jpg
+2025-03-09 14:10:05,293 - INFO - Saved overexposed.jpg_edges to results\overexposed.jpg_edges_20250309_140944.jpg
+2025-03-09 14:10:07,061 - INFO - 
+Analyzing image: underexposed.jpg
+2025-03-09 14:10:07,254 - INFO - Saved underexposed.jpg_gaussian_noise to results\underexposed.jpg_gaussian_noise_20250309_140944.jpg
+2025-03-09 14:10:07,266 - INFO - Saved underexposed.jpg_salt_pepper to results\underexposed.jpg_salt_pepper_20250309_140944.jpg
+2025-03-09 14:10:07,269 - INFO - Saved underexposed.jpg_gaussian_filtered to results\underexposed.jpg_gaussian_filtered_20250309_140944.jpg
+2025-03-09 14:10:07,272 - INFO - Saved underexposed.jpg_median_filtered to results\underexposed.jpg_median_filtered_20250309_140944.jpg
+2025-03-09 14:10:07,276 - INFO - Saved underexposed.jpg_sharpened to results\underexposed.jpg_sharpened_20250309_140944.jpg
+2025-03-09 14:10:07,281 - INFO - Saved underexposed.jpg_edges to results\underexposed.jpg_edges_20250309_140944.jpg
+2025-03-09 14:10:09,101 - INFO - All demonstrations completed successfully!
