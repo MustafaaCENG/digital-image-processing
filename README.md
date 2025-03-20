@@ -20,6 +20,11 @@ The repository is organized into different modules, each focusing on specific as
 - Contains test images and example results
 - Comprehensive documentation in the module's README
 
+### 2. Spatial Filtering
+- Located in `/resolution_interpolation/`
+- Comprehensive documentation in the module's README
+
+
 ## 🛠️ Technologies Used
 
 - Python 3.x
