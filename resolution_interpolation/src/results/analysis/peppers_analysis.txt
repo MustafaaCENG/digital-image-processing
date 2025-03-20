@@ -1,0 +1,75 @@
+Image Quality Analysis Results
+==============================
+
+Factor 2 - Direct - nearest:
+  MSE:  0.8980
+  PSNR: 48.5982 dB
+
+Factor 2 - Interpolated - nearest:
+  MSE:  0.6432
+  PSNR: 50.0476 dB
+
+Factor 2 - Direct - bilinear:
+  MSE:  0.9731
+  PSNR: 48.2491 dB
+
+Factor 2 - Interpolated - bilinear:
+  MSE:  0.4922
+  PSNR: 51.2094 dB
+
+Factor 2 - Direct - bicubic:
+  MSE:  1.2107
+  PSNR: 47.3005 dB
+
+Factor 2 - Interpolated - bicubic:
+  MSE:  0.9927
+  PSNR: 48.1627 dB
+
+Factor 4 - Direct - nearest:
+  MSE:  4.7037
+  PSNR: 41.4065 dB
+
+Factor 4 - Interpolated - nearest:
+  MSE:  1.6838
+  PSNR: 45.8680 dB
+
+Factor 4 - Direct - bilinear:
+  MSE:  3.8729
+  PSNR: 42.2504 dB
+
+Factor 4 - Interpolated - bilinear:
+  MSE:  0.3902
+  PSNR: 52.2176 dB
+
+Factor 4 - Direct - bicubic:
+  MSE:  4.2717
+  PSNR: 41.8248 dB
+
+Factor 4 - Interpolated - bicubic:
+  MSE:  1.5173
+  PSNR: 46.3200 dB
+
+Factor 8 - Direct - nearest:
+  MSE:  19.6728
+  PSNR: 35.1921 dB
+
+Factor 8 - Interpolated - nearest:
+  MSE:  6.4918
+  PSNR: 40.0071 dB
+
+Factor 8 - Direct - bilinear:
+  MSE:  16.7049
+  PSNR: 35.9024 dB
+
+Factor 8 - Interpolated - bilinear:
+  MSE:  0.7271
+  PSNR: 49.5151 dB
+
+Factor 8 - Direct - bicubic:
+  MSE:  16.9368
+  PSNR: 35.8425 dB
+
+Factor 8 - Interpolated - bicubic:
+  MSE:  3.0807
+  PSNR: 43.2444 dB
+

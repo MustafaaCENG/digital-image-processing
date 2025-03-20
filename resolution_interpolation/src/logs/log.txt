@@ -1,0 +1,15 @@
+[2025-03-20 14:38:03] Starting image processing
+[2025-03-20 14:38:03] No images found to process. Please add images to the following directories:
+[2025-03-20 14:38:03] - Grayscale images (512x512 or larger): images/grayscale/
+[2025-03-20 14:38:03] - RGB images (512x512 or larger): images/rgb/
+[2025-03-20 14:39:18] Starting image processing
+[2025-03-20 14:39:18] Processing image: images/grayscale\boat.png
+[2025-03-20 14:39:24] Completed processing image: images/grayscale\boat.png
+[2025-03-20 14:39:24] Processing image: images/grayscale\cameraman.png
+[2025-03-20 14:39:30] Completed processing image: images/grayscale\cameraman.png
+[2025-03-20 14:39:30] Processing image: images/rgb\baboon.png
+[2025-03-20 14:39:34] Completed processing image: images/rgb\baboon.png
+[2025-03-20 14:39:34] Processing image: images/rgb\peppers.png
+[2025-03-20 14:39:37] Completed processing image: images/rgb\peppers.png
+[2025-03-20 14:39:37] Processed 2 grayscale images and 2 RGB images
+[2025-03-20 14:39:37] Completed all image processing
