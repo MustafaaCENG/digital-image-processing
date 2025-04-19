@@ -24,6 +24,13 @@ The repository is organized into different modules, each focusing on specific as
 - Located in `/resolution_interpolation/`
 - Comprehensive documentation in the module's README
 
+### 4. Image Segmentation
+- Located in `/image-segmentation/`
+- Implementation of K-means clustering for image segmentation
+- Analysis of segmentation impact on image quality and compressibility
+- Comparison of different cluster counts (k values)
+- Includes both grayscale and color image segmentation
+- Detailed documentation and visual results in the module's README
 
 ## 🛠️ Technologies Used
 
