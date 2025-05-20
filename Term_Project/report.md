@@ -1,9 +1,9 @@
 # Document Extraction and Classification System (DocuSense)
 
 ## Author
-Mustafa Alperen Uluırmak
+Mustafa Karaçukur
 Department of Computer Engineering
-Gazi University
+Abdullah Gul University
 
 ## Abstract
 This project implements an advanced document extraction and classification system called DocuSense, focusing on automated processing of invoice documents from e-commerce platforms. The system utilizes OCR (Optical Character Recognition) technology and machine learning classification methods to extract relevant information from documents and classify them according to their types. The project specifically demonstrates its capabilities using Amazon.com.tr invoice documents as a case study, achieving a confidence score of 0.85 for key field extractions.
